@@ -24,6 +24,9 @@
                             </p>
                             <hr>
                         @endforeach
+                            <div class="pagination__my">
+                                {{ $posts->links() }}
+                            </div>
                     </div>
                 </div>
             </div>
