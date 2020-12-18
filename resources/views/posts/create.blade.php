@@ -13,7 +13,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                            <form action="{{route('add_post')}}" method="post">
+                            <form action="{{route('add_post')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Title</label>
@@ -37,6 +37,15 @@
                                     <label for="exampleInputPassword1">Content</label>
                                     <textarea class="form-control" name="content">{{old('content')}}</textarea>
                                     @error('content')
+                                    <span class="invalid" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Picture</label>
+                                    <input type="file" class="form-control-file pb-2" name="image" id="exampleFormControlFile1">
+                                    @error('image')
                                     <span class="invalid" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
