@@ -13,10 +13,19 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                            <form action="{{route('add_post')}}" method="post">
+                            <form action="{{route('add_post')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Title</label>
+                                    <label for="file">Image</label>
+                                    <input  class="form-control" type="file" name="file" value="{{old('file')}}">
+                                    @error('file')
+                                    <span class="invalid" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="title">Title</label>
                                     <input  class="form-control" type="text" name="title" value="{{old('title')}}">
                                     @error('title')
                                     <span class="invalid" role="alert">
@@ -25,7 +34,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Description</label>
+                                    <label for="description">Description</label>
                                     <input  class="form-control" type="text" name="description" value="{{old('description')}}">
                                     @error('description')
                                     <span class="invalid" role="alert">
@@ -34,7 +43,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Content</label>
+                                    <label for="content">Content</label>
                                     <textarea class="form-control" name="content">{{old('content')}}</textarea>
                                     @error('content')
                                     <span class="invalid" role="alert">
