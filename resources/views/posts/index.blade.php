@@ -15,7 +15,7 @@
                         @endif
 
                         @foreach ($posts as $post)
-                            <div style="max-height: 100px; max-width: 150px;"><img src="{{$post->image}}" alt="image"/></div>
+                            <div style="max-height: 100px; max-width: 150px;"><img src="{{asset('storage/uploads/' . $post->image)}}" alt="image"/></div>
                             <h3><a href="{{route('article_by_id', ['id' => $post->id])}}">{{$post->title}}</a></h3>
                             <p>
                                 {{$post->description}}
