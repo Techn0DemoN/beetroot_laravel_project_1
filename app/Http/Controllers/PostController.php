@@ -31,7 +31,7 @@ class PostController extends Controller
     public function addPost(CreatePost $request)
     {
         $data = $request->all();
-        $filePath = $request->file('file')->store('uploads');
+        $filePath = $request->file('file')->store('uploads', 'public');
 // This is validation example 1
 //        $validator = Validator::make($data, [
 //            'title' => 'required|max:255|min:10',
