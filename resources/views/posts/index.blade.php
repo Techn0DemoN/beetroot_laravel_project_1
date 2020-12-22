@@ -22,8 +22,17 @@
                             <p>
                                 Created by: {{$post->user->name}}
                             </p>
+                            <p>
+                                <img src="{{ asset('storage/' . $post->image) }}" width="120px" height="160px"/>
+                            </p>
                             <hr>
                         @endforeach
+                            <!-- Pagination (5) -->
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                {{$posts->links()}}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

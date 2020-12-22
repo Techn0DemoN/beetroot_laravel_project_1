@@ -14,11 +14,14 @@
                             </div>
                         @endif
 
-                            <h3>{{$post->title}}</h3>
-                            <hr>
-                            <p>
-                                {{$post->content}}
-                            </p>
+                        <h3>{{$post->title}}</h3>
+                        <hr>
+                        <p>
+                            {{$post->content}}
+                        </p>
+                        <p>
+                            <img src="{{ asset('storage/' . $post->image) }}" width="120px" height="160px"/>
+                        </p>
                         <p>
                             Created by: {{$post->user_id}}
                         </p>

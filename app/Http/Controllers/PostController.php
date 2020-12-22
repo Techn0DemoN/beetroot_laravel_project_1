@@ -6,6 +6,7 @@ use App\Http\Requests\CreatePost;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -13,14 +14,24 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('user')->get();
-        return view('posts.index', ['posts'=>$posts]);
+//        $var = 'User';
+//        //$posts = Post::with('user')->get();
+//        //Pagination (5)
+//        $data = DB::table('users')//->where('name', '=', 'User')
+//        //->whereNotNull('name')
+//        ->orderByRaw("FIELD(name , ' " . $var . " ') DESC")
+//            ->get('name');
+//        dd($data);
+
+        $posts = Post::with('user')->paginate(5);
+
+        return view('posts.index', ['posts' => $posts]);
     }
 
     public function article($id)
     {
         $post = Post::find($id);
-        return view('posts.article', ['post'=>$post]);
+        return view('posts.article', ['post' => $post]);
     }
 
     public function add()
@@ -59,14 +70,17 @@ class PostController extends Controller
 // The validation example 5 is located from other folder (App\Http\Requests\CreatePost)
 
         $post = new Post();
+
         $post->user_id = Auth::id();
         $post->title = $data['title'];
-        $post->description =  $data['description'];
-        $post->content =  $data['content'];
+        $post->description = $data['description'];
+        $post->content = $data['content'];
+        //image
+        $post->image = $request->file('image')->store('', 'public');
 
         $post->save();
 
-        return redirect(route('article_by_id', $post->id ));
+        return redirect(route('article_by_id', $post->id));
     }
 
 }
