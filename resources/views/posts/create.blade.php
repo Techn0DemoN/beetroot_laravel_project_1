@@ -1,5 +1,7 @@
+<script src="{{ asset('/js/ckeditor/ckeditor.js') }}"
+        type="text/javascript" charset="utf-8" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 @extends('layouts.app')
-
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -44,7 +46,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="content">Content</label>
-                                    <textarea class="form-control" name="content">{{old('content')}}</textarea>
+                                    <textarea class="form-control" name="content" id="editor1">{{old('content')}}</textarea>
                                     @error('content')
                                     <span class="invalid" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -60,4 +62,12 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            CKEDITOR.replace( 'editor1',{
+                filebrowserBrowseUrl : '/elfinder/ckeditor'
+            } );
+        });
+    </script>
 @endsection
+
