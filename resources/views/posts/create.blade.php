@@ -53,6 +53,15 @@
                                     </span>
                                     @enderror
                                 </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Picture</label>
+                                    <input type="file" class="form-control-file pb-2" name="image" id="exampleFormControlFile1">
+                                    @error('image')
+                                    <span class="invalid" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
                                 <button type="submit" class="btn btn-primary">Create</button>
 
                             </form>

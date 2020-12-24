@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('user')->orderBy("id", 'desc')->paginate(5);
+        $posts = Post::with('user')->latest()->paginate(5);
         return view('posts.index', ['posts'=>$posts]);
     }
 
@@ -31,7 +31,8 @@ class PostController extends Controller
     public function addPost(CreatePost $request)
     {
         $data = $request->all();
-        $filePath = $request->file('file')->store('uploads', 'public');
+        $image = $request->image->store('uploads', 'public');
+
 // This is validation example 1
 //        $validator = Validator::make($data, [
 //            'title' => 'required|max:255|min:10',
@@ -63,8 +64,8 @@ class PostController extends Controller
         $post->title = $data['title'];
         $post->description =  $data['description'];
         $post->content =  $data['content'];
-        $post->image = $filePath;
-        //$file->move($destinationPath,$file->getClientOriginalName());
+        $post->image =  $image;
+
         $post->save();
 
         return redirect(route('article_by_id', $post->id ));

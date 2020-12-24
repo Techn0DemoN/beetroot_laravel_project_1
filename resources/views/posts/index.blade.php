@@ -15,22 +15,36 @@
                         @endif
 
                         @foreach ($posts as $post)
+                                <div class="container">
+                                    <h2><a href="{{route('article_by_id', ['id' => $post->id])}}">{{$post->title}}</a></h2>
+                                    <div class="card" >
+                                        <div class="row no-gutters">
+                                            <div class="col-sm-5">
+                                                <img class="card-img" src="{{ asset('storage/' . $post->image) }}" alt="image">
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <div class="card-body">
+                                                    <p class="card-text" >{{$post->description}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer w-100 text-muted">
+                                        Created by: {{$post->user->name}}
+                                    </div>
+                                </div>
+                            <hr />
+                       @endforeach
 
-                            <div><img src="{{asset('storage/' . $post->image)}}" alt="image" style="max-height: 100px; max-width: 150px;"/></div>
-                            <h3><a href="{{route('article_by_id', ['id' => $post->id])}}">{{$post->title}}</a></h3>
-                            <p>
-                                {{$post->description}}
-                            </p>
-                            <p>
-                                Created by: {{$post->user->name}}
-                            </p>
-
-                            <hr>
-                        @endforeach
                     </div>
-                    <div class="justify-content-center">{{ $posts->links() }}</div>
+
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="d-flex justify-content-center mt-3">
+        {{ $posts->links() }}
+    </div>
+
 @endsection
