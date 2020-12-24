@@ -18,12 +18,9 @@ class PostsSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             $posts[] = [
                 'user_id' => rand(1,2),
-                'title' => file_get_contents('http://loripsum.net/api', FALSE, NULL, 3, rand(10, 50)),
-//                'title' => str_random(10),
-//                'description' => str_random(50),
-                'description' => file_get_contents('http://loripsum.net/api', FALSE, NULL, 3, rand(25, 70)),
-//                'content' => str_random(150),
-                'content' => file_get_contents('http://loripsum.net/api', FALSE, NULL, 3, rand(100, 250)),
+                'title' => str_random(10),
+                'description' => str_random(50),
+                'content' => str_random(150),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ];

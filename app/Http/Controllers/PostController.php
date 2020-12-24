@@ -4,17 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePost;
 use App\Post;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
-use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('user')->paginate(5);
+        $posts = Post::with('user')->latest()->paginate(5);
         return view('posts.index', ['posts'=>$posts]);
     }
 
@@ -32,6 +29,7 @@ class PostController extends Controller
     public function addPost(CreatePost $request)
     {
         $data = $request->all();
+        $image = $request->image->store('uploads', 'public');
 
 // This is validation example 1
 //        $validator = Validator::make($data, [
@@ -64,6 +62,7 @@ class PostController extends Controller
         $post->title = $data['title'];
         $post->description =  $data['description'];
         $post->content =  $data['content'];
+        $post->image =  $image;
 
         $post->save();
 
