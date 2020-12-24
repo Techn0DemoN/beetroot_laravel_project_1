@@ -19,6 +19,11 @@
                             <p>
                                 {!! $post->content !!}
                             </p>
+
+                            <div class="row justify-content-center">
+                            {!! $post->qr !!}
+                            </div>
+
                         <p>
                             Created by: {{$post->user_id}}
                         </p>

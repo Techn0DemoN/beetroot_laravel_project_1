@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PostsSeeder extends Seeder
 {
@@ -15,12 +16,14 @@ class PostsSeeder extends Seeder
     {
         $posts = [];
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 1; $i < 11; $i++) {
             $posts[] = [
                 'user_id' => rand(1,2),
                 'title' => str_random(10),
                 'description' => str_random(50),
                 'content' => str_random(150),
+                // For a correct QR code, specify APP_URL in the .env file.
+                'qr' => QrCode::generate(route('article_by_id', $i)),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ];

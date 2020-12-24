@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreatePost;
 use App\Post;
 use Illuminate\Support\Facades\Auth;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
 class PostController extends Controller
@@ -65,8 +66,9 @@ class PostController extends Controller
         $post->image =  $image;
 
         $post->save();
+        $post->qr = QrCode::generate(route('article_by_id', [$post->id]));
+        $post->save();
 
         return redirect(route('article_by_id', $post->id ));
     }
-
 }
