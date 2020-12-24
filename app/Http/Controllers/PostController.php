@@ -29,7 +29,7 @@ class PostController extends Controller
     public function addPost(CreatePost $request)
     {
         $data = $request->all();
-        $image = $request->image->store('uploads', 'public');
+        $image = $request->image->store('picture_for_card', 'public');
 
 // This is validation example 1
 //        $validator = Validator::make($data, [

@@ -34,8 +34,8 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Content</label>
-                                    <textarea class="form-control" name="content">{{old('content')}}</textarea>
+                                    <label for="content">Content</label>
+                                    <textarea class="form-control" name="content" id="content">{{old('content')}}</textarea>
                                     @error('content')
                                     <span class="invalid" role="alert">
                                         <strong>{{ $message }}</strong>

@@ -30,7 +30,7 @@ class AddImageToPostsTable extends Migration
             $table->dropColumn('image');
         });
 
-        $files = Storage::allFiles('public/uploads');
+        $files = Storage::allFiles('public/picture_for_card');
         Storage::delete($files);
     }
 }
