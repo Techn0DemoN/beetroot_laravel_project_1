@@ -19,8 +19,8 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="file">Image</label>
-                                    <input  class="form-control" type="file" name="file" value="{{old('file')}}">
-                                    @error('file')
+                                    <input  class="form-control" type="file" name="image" value="{{old('image')}}">
+                                    @error('image')
                                     <span class="invalid" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -53,15 +53,15 @@
                                     </span>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleFormControlFile1">Picture</label>
-                                    <input type="file" class="form-control-file pb-2" name="image" id="exampleFormControlFile1">
-                                    @error('image')
-                                    <span class="invalid" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="exampleFormControlFile1">Picture</label>--}}
+{{--                                    <input type="file" class="form-control-file pb-2" name="image" id="exampleFormControlFile1">--}}
+{{--                                    @error('image')--}}
+{{--                                    <span class="invalid" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                    @enderror--}}
+{{--                                </div>--}}
                                 <button type="submit" class="btn btn-primary">Create</button>
 
                             </form>

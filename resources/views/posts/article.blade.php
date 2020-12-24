@@ -17,7 +17,7 @@
                             <h3>{{$post->title}}</h3>
                             <hr>
                             <p>
-                                {{$post->content}}
+                             {!!$post->content!!}
                             </p>
                         <p>
                             Created by: {{$post->user_id}}
