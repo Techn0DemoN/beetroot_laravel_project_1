@@ -19,6 +19,7 @@
                         <p>
                             {{$post->content}}
                         </p>
+
                         <p>
                             <img src="{{ asset('storage/' . $post->image) }}" width="120px" height="160px"/>
                         </p>
@@ -28,6 +29,11 @@
 
                     </div>
                 </div>
+            </div>
+            <div class="col-md-4">
+                <p>
+                    {{$pageQR}}
+                </p>
             </div>
         </div>
     </div>

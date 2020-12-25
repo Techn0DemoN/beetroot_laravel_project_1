@@ -9,20 +9,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Validator;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PostController extends Controller
 {
+    /**
+     * Main route
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
-//        $var = 'User';
-//        //$posts = Post::with('user')->get();
-//        //Pagination (5)
-//        $data = DB::table('users')//->where('name', '=', 'User')
-//        //->whereNotNull('name')
-//        ->orderByRaw("FIELD(name , ' " . $var . " ') DESC")
-//            ->get('name');
-//        dd($data);
-
         $posts = Post::with('user')->paginate(5);
 
         return view('posts.index', ['posts' => $posts]);
@@ -30,8 +27,15 @@ class PostController extends Controller
 
     public function article($id)
     {
+        $pageQR = $this->articleQRCode();
+
         $post = Post::find($id);
-        return view('posts.article', ['post' => $post]);
+        return view('posts.article', ['post' => $post, 'pageQR' => $pageQR]);
+    }
+
+    public function articleQRCode()
+    {
+        return QrCode::size(428)->generate(url()->current());
     }
 
     public function add()
