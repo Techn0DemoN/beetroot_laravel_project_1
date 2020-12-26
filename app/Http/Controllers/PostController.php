@@ -38,6 +38,13 @@ class PostController extends Controller
         return QrCode::size(428)->generate(url()->current());
     }
 
+    public function getWeather()
+    {
+        $array = ['temp' => 20, 'city' => 'Odesa', 'wind' => 33.3];
+
+        return response()->json($array);
+    }
+
     public function add()
     {
         return view('posts.create');

@@ -1,6 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="input_weather">Please enter weather</label>
+            <input id="input_weather" type="text" class="form-control" aria-describedby="emailHelp">
+            <small id="emailHelp" class="form-text text-muted">Use english only</small>
+            <a id="my_button" href="#" class="btn btn-primary my-2">Main call to action</a>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="weatherCard">
+            <div class="currentTemp">
+                <span id="weather_temp" class="temp">temp</span>
+                <span id="weather_city" class="location">city</span>
+            </div>
+            <div class="currentWeather">
+                <span class="conditions"><img id="weather_img" src=""/></span>
+                <div class="info">
+                    <span id="weather_wind" class="wind">wind</span>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">

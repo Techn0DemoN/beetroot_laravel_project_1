@@ -20,10 +20,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'PostController@index')->name('home');
+Route::get('/weather-ajax', 'PostController@getWeather')->name('weather');
 Route::get('/article/{id}', 'PostController@article')->name('article_by_id');
 
-Route::middleware(['auth'])->group(function (){
-    Route::post ('/add_post', 'PostController@addPost')->name('add_post');
+Route::middleware(['auth'])->group(function () {
+    Route::post('/add_post', 'PostController@addPost')->name('add_post');
     Route::get('/add_post', 'PostController@add')->name('create_post');
 });
 
