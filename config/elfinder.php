@@ -10,7 +10,7 @@ return array(
     | The dir where to store the images (relative from public)
     |
     */
-    'dir' => ['files'],
+    'dir' => ['storage/uploads'],
 
     /*
     |--------------------------------------------------------------------------
@@ -80,8 +80,8 @@ return array(
         'roots'  => array(
             array(
                 'driver' => 'LocalFileSystem',
-                'path'   => public_path().'/uploads',
-                'URL'    => 'http://betroot_laravel_project_1/uploads'
+                'path' => public_path().'/storage/uploads',
+                'URL' => env('AWS_ACCESS_KEY_ID') . '/storage/uploads',
             ),
         )
     ),
