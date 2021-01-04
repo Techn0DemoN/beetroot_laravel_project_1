@@ -21,6 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'PostController@index')->name('home');
 Route::get('/article/{id}', 'PostController@article')->name('article_by_id');
+Route::post('change_like', 'LikeController@changeLikeAjax')->name('change_like_status_ajax');
 
 Route::middleware(['auth'])->group(function (){
     Route::post ('/add_post', 'PostController@addPost')->name('add_post');

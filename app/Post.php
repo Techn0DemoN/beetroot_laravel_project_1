@@ -10,4 +10,10 @@ class Post extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class)
+            ->where('like','=', '1');
+    }
 }

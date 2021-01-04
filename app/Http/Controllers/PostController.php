@@ -18,7 +18,7 @@ class PostController extends Controller
 
     public function article($id)
     {
-        $post = Post::find($id);
+        $post = Post::with('likes')->find($id);
         return view('posts.article', ['post'=>$post]);
     }
 
