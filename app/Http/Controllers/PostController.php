@@ -7,6 +7,7 @@ use App\Http\Requests\CreatePost;
 use App\Post;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 
 class PostController extends Controller
@@ -89,5 +90,21 @@ class PostController extends Controller
         }
 
         return redirect(route('article_by_id', $post->id));
+    }
+
+    public function search()
+    {
+        $search = Input::get('search');
+
+        return view('posts.index', [
+            'posts' => Post::where('title', 'like', '%' . $search . '%')
+                ->latest()
+                ->paginate(5)
+                ->setPath('')
+                ->appends([
+                    'search' => $search
+                ]),
+            'categories' => Category::all()
+        ]);
     }
 }

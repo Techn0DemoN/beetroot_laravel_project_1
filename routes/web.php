@@ -11,6 +11,9 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,10 +25,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'PostController@index')->name('home');
 Route::get('/article/{id}', 'PostController@article')->name('article_by_id');
 Route::get('/category/{id}', 'PostController@indexCategoryFilter')->name('category_filter');
+Route::any('/search', 'PostController@search')->name('article_search');
 Route::post('change_like', 'LikeController@changeLikeAjax')->name('change_like_status_ajax');
 
-Route::middleware(['auth'])->group(function (){
-    Route::post ('/add_post', 'PostController@addPost')->name('add_post');
+Route::middleware(['auth'])->group(function () {
+    Route::post('/add_post', 'PostController@addPost')->name('add_post');
     Route::get('/add_post', 'PostController@add')->name('create_post');
 });
 

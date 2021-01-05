@@ -6,16 +6,24 @@
             <div class="col-md-8">
 
                 <div class="dropdown" style="margin-bottom: 15px">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Категория
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/">Все категории</a>
                         @foreach($categories as $category)
-                            <a class="dropdown-item" href="{{ route('category_filter', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                            <a class="dropdown-item"
+                               href="{{ route('category_filter', ['id' => $category->id]) }}">{{ $category->name }}</a>
                         @endforeach
                     </div>
                 </div>
+
+                <form class="form-inline md-form mr-auto mb-4" action="{{ route('article_search') }}" method="post" role="search">
+                    @csrf
+                    <input class="form-control mr-sm-2" type="text" aria-label="Search" name="search" id="search_field" autocomplete="off">
+                    <button class="btn aqua-gradient btn-rounded btn-sm my-0" type="submit">Найти</button>
+                </form>
 
                 <div class="card">
                     <div class="card-header">Dashboard</div>
@@ -28,33 +36,34 @@
                         @endif
 
                         @foreach ($posts as $post)
-                                <div class="container">
-                                    <h2><a href="{{route('article_by_id', ['id' => $post->id])}}">{{$post->title}}</a></h2>
-                                    <div class="card" >
-                                        <div class="row no-gutters">
-                                            <div class="col-sm-5">
-                                                <img class="card-img" src="{{ asset('storage/' . $post->image) }}" alt="image">
-                                            </div>
-                                            <div class="col-sm-7">
-                                                <div class="card-body">
-                                                    <p class="card-text" >{{$post->description}}</p>
-                                                </div>
-                                            </div>
+                            <div class="container">
+                                <h2><a href="{{route('article_by_id', ['id' => $post->id])}}">{{$post->title}}</a></h2>
+                                <div class="card">
+                                    <div class="row no-gutters">
+                                        <div class="col-sm-5">
+                                            <img class="card-img" src="{{ asset('storage/' . $post->image) }}"
+                                                 alt="image">
                                         </div>
-                                    </div>
-                                    <div class="card-footer w-100 text-muted">
-                                        <div class="d-flex justify-content-between">
-                                            <div class="p-2">Created by: {{$post->user->name}}</div>
-                                            <div class="p-2">
-                                                @foreach($post->categories as $category)
-                                                    <a href="{{ route('category_filter', ['id' => $category->id]) }}">#{{ $category->name }}</a>
-                                                @endforeach
+                                        <div class="col-sm-7">
+                                            <div class="card-body">
+                                                <p class="card-text">{{$post->description}}</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            <hr />
-                       @endforeach
+                                <div class="card-footer w-100 text-muted">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="p-2">Created by: {{$post->user->name}}</div>
+                                        <div class="p-2">
+                                            @foreach($post->categories as $category)
+                                                <a href="{{ route('category_filter', ['id' => $category->id]) }}">#{{ $category->name }}</a>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr/>
+                        @endforeach
 
                     </div>
                 </div>
