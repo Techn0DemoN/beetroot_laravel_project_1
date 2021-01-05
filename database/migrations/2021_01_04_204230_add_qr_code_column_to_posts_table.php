@@ -3,9 +3,8 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\Storage;
 
-class AddImageToPostsTable extends Migration
+class AddQrCodeColumnToPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +14,7 @@ class AddImageToPostsTable extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('image')->after('content')->nullable();
+            $table->text('qr_code');
         });
     }
 
@@ -27,10 +26,7 @@ class AddImageToPostsTable extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('image');
+            //
         });
-
-        $files = Storage::allFiles('public/uploads');
-        Storage::delete($files);
     }
 }

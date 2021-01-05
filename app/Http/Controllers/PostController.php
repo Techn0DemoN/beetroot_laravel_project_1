@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests\CreatePost;
 use App\Post;
+use App\PostCategories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -13,19 +17,31 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('user')->latest()->paginate(5);
-        return view('posts.index', ['posts'=>$posts]);
+        $categories = Category::all();
+        $posts = Post::with('user', 'category')->latest()->paginate(5);
+        return view('posts.index', ['posts'=>$posts], ['categories'=>$categories]);
+    }
+    public function postByCategory($category)
+    {
+        $posts = Post::with('user', 'category')
+            ->leftJoin('post_categories', 'posts.id', '=', 'post_categories.post_id')
+            ->where('post_categories.category_id', '=', $category)
+            ->paginate(5);
+        $categories = Category::all();
+        return view('posts.index', ['posts' => $posts], ['categories' => $categories]);
+
     }
 
     public function article($id)
     {
-        $post = Post::find($id);
+        $post = Post::with('like')->find($id);
         return view('posts.article', ['post'=>$post]);
     }
 
     public function add()
     {
-        return view('posts.create');
+        $categories = Category::all();
+        return view('posts.create')->with('categories', $categories);
     }
 
     public function addPost(CreatePost $request)
@@ -65,10 +81,9 @@ class PostController extends Controller
         $post->description =  $data['description'];
         $post->content =  $data['content'];
         $post->image =  $image;
-
+        $post->qr_code = QrCode::generate(URL::route('article_by_id', [$post->id]));
         $post->save();
-
+        $post->relationPostCategory($data['categories']);
         return redirect(route('article_by_id', $post->id ));
     }
-
 }

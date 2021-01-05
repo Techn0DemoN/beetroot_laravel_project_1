@@ -27,6 +27,20 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="category">Category</label>
+                                    @foreach($categories as $category)
+                                    <div class="form-check" style="margin: 10px;">
+                                        <input  name="categories[]" type="checkbox" class="form-check-input" id="exampleCheck1" value="{{$category->id}}">
+                                        <label class="form-check-label" for="exampleCheck1">{{$category->name}}</label>
+                                    </div>
+                                    @endforeach
+                                </div>
+                                @error('category')
+                                <span class="invalid" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <div class="form-group">
                                     <label for="title">Title</label>
                                     <input  class="form-control" type="text" name="title" value="{{old('title')}}">
                                     @error('title')
@@ -53,15 +67,7 @@
                                     </span>
                                     @enderror
                                 </div>
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="exampleFormControlFile1">Picture</label>--}}
-{{--                                    <input type="file" class="form-control-file pb-2" name="image" id="exampleFormControlFile1">--}}
-{{--                                    @error('image')--}}
-{{--                                    <span class="invalid" role="alert">--}}
-{{--                                        <strong>{{ $message }}</strong>--}}
-{{--                                    </span>--}}
-{{--                                    @enderror--}}
-{{--                                </div>--}}
+
                                 <button type="submit" class="btn btn-primary">Create</button>
 
                             </form>
