@@ -30,7 +30,14 @@
                                         </div>
                                     </div>
                                     <div class="card-footer w-100 text-muted">
-                                        Created by: {{$post->user->name}}
+                                        <div class="d-flex justify-content-between">
+                                            <div class="p-2">Created by: {{$post->user->name}}</div>
+                                            <div class="p-2">
+                                                @foreach($post->categories as $category)
+                                                    #{{ $category->name }}
+                                                @endforeach
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             <hr />

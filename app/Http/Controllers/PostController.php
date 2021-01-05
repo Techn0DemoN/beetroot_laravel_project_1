@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests\CreatePost;
 use App\Post;
 use Illuminate\Support\Facades\Auth;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
 class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('user')->latest()->paginate(5);
+        $posts = Post::with('user', 'categories')->latest()->paginate(5);
         return view('posts.index', ['posts'=>$posts]);
     }
 
@@ -24,7 +24,9 @@ class PostController extends Controller
 
     public function add()
     {
-        return view('posts.create');
+        return view('posts.create', [
+            'categories' => Category::all()
+        ]);
     }
 
     public function addPost(CreatePost $request)
@@ -65,9 +67,10 @@ class PostController extends Controller
         $post->content =  $data['content'];
         $post->image =  $image;
 
-        $post->save();
-        $post->qr = QrCode::generate(route('article_by_id', [$post->id]));
-        $post->save();
+        if($post->save()){
+            $post->createRelation($data['categories']);
+            $post->addQrCode();
+        }
 
         return redirect(route('article_by_id', $post->id ));
     }
