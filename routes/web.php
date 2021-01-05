@@ -21,6 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'PostController@index')->name('home');
 Route::get('/article/{id}', 'PostController@article')->name('article_by_id');
+Route::get('/category/{id}', 'PostController@indexCategoryFilter')->name('category_filter');
 Route::post('change_like', 'LikeController@changeLikeAjax')->name('change_like_status_ajax');
 
 Route::middleware(['auth'])->group(function (){

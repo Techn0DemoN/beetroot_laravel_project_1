@@ -4,6 +4,19 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+
+                <div class="dropdown" style="margin-bottom: 15px">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Категория
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/">Все категории</a>
+                        @foreach($categories as $category)
+                            <a class="dropdown-item" href="{{ route('category_filter', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                        @endforeach
+                    </div>
+                </div>
+
                 <div class="card">
                     <div class="card-header">Dashboard</div>
 
@@ -34,7 +47,7 @@
                                             <div class="p-2">Created by: {{$post->user->name}}</div>
                                             <div class="p-2">
                                                 @foreach($post->categories as $category)
-                                                    #{{ $category->name }}
+                                                    <a href="{{ route('category_filter', ['id' => $category->id]) }}">#{{ $category->name }}</a>
                                                 @endforeach
                                             </div>
                                         </div>

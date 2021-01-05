@@ -23,7 +23,6 @@ class Post extends Model
         return $this->belongsToMany(Category::class, 'post_categories');
     }
 
-
     public function createRelation(array $categories)
     {
         foreach ($categories as $category){
