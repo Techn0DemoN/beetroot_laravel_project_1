@@ -1,3 +1,5 @@
+<script src="{{ asset('js/search.js') }}"></script>
+
 @extends('layouts.app')
 
 @section('content')
@@ -19,10 +21,21 @@
                     </div>
                 </div>
 
-                <form class="form-inline md-form mr-auto mb-4" action="{{ route('article_search') }}" method="post" role="search">
+                <form class="form-inline md-form mr-auto mb-4" id="test_form" action="{{ route('article_search') }}"
+                      method="post"
+                      role="search">
                     @csrf
-                    <input class="form-control mr-sm-2" type="text" aria-label="Search" name="search" id="search_field" autocomplete="off">
-                    <button class="btn aqua-gradient btn-rounded btn-sm my-0" type="submit">Найти</button>
+                    <div class="dropdown w-100">
+                        <label for="search_field"></label>
+                        <input class="form-control mr-sm-2 dropdown-toggle w-100" type="text" id="search_field"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="search"
+                               autocomplete="off"
+                               oninput="autoPredictorFunction('{{ route('SearchOptions')}}'); hiddenList()"
+                               onclick="hiddenList()"
+                               value="{{ isset($characterSearch) ? $characterSearch : '' }}"/>
+                        <div class="dropdown-menu w-100" id="search_field_list" aria-labelledby="search_field"></div>
+                    </div>
+                    <button class="btn aqua-gradient btn-rounded btn-sm my-0 mt-3" type="submit">Найти</button>
                 </form>
 
                 <div class="card">

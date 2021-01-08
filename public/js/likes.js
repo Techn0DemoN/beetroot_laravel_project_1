@@ -9,10 +9,15 @@ function changeStatus(id) {
         },
         dataType: 'json',
         success: function (data) {
-            $( "#count" ).text(data.likeCount)
+           $( "#count" ).text(data.likeCount)
         },
         error: function (msg) {
-            alert('Error');
+            if(msg.status === 401){
+                alert('Please login or register.');
+            } else {
+                alert('Error');
+            }
         }
     });
+
 }
