@@ -52,7 +52,7 @@
                         @else
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('create_post')}}">
-                                    Crate post
+                                    Create post
                                 </a>
                             </li>
                             <li class="nav-item dropdown">

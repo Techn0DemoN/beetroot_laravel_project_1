@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="container">
+        <h4>Categories:</h4>
+        @foreach($categories as $category)
+            <a class="btn btn-outline-success" href="{{route('category', [ $category->title ])}}">{{$category->title}}</a>
+        @endforeach
+    </div>
+
     <div class="col-md-12">
         <div class="form-group">
             <label for="input_weather">Please enter weather</label>
@@ -45,11 +52,19 @@
                                 Created by: {{$post->user->name}}
                             </p>
                             <p>
-                                <img src="{{ asset('storage/' . $post->image) }}" width="120px" height="160px"/>
+                                <span>Categories:</span>
+                                @foreach($post->categories as $value)
+                                    <strong><span style="color: red;">{{$value->title}}</span></strong>
+                                @endforeach
                             </p>
+                            <p>
+                                <img src="{{ asset('storage/' . $post->image) }}" width="120px" height="160px"/>
+
+                            </p>
+
                             <hr>
-                        @endforeach
-                            <!-- Pagination (5) -->
+                    @endforeach
+                    <!-- Pagination (5) -->
                         <div class="row">
                             <div class="col-12 text-center">
                                 {{$posts->links()}}

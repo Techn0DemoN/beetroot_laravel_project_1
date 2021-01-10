@@ -45,6 +45,16 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                @foreach($categories as $category)
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="category"
+                                               name="categories[]"
+                                               value="{{$category->id}}">
+                                        <label class="form-check-label" for="category">{{$category->title}}</label>
+                                    </div>
+                                @endforeach   
+                            </div>
+                            <div class="form-group">
                                 <input name="image" type="file" class="btn btn-outline-success">
                             </div>
                             <button type="submit" class="btn btn-primary">Create</button>

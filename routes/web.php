@@ -23,8 +23,17 @@ Route::get('/', 'PostController@index')->name('home');
 Route::get('/weather-ajax', 'PostController@getWeather')->name('weather');
 Route::get('/article/{id}', 'PostController@article')->name('article_by_id');
 
+//likes
+Route::post('/article/{id}/like', 'PostController@getLike')->name('like');
+
 Route::middleware(['auth'])->group(function () {
     Route::post('/add_post', 'PostController@addPost')->name('add_post');
     Route::get('/add_post', 'PostController@add')->name('create_post');
 });
+
+//Categories
+
+
+Route::get('/{title}', 'CategoryController@index')->name('category');
+
 

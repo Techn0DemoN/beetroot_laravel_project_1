@@ -24,8 +24,15 @@
                             <img src="{{ asset('storage/' . $post->image) }}" width="120px" height="160px"/>
                         </p>
                         <p>
-                            Created by: {{$post->user_id}}
+                            Created by: {{$post->user->name}}
                         </p>
+                            {{$like}}
+                            @if(Auth::check())
+                        <form action="{{route('like', [ $post->id ])}}" method="post">
+                            @csrf
+                            <input type="image" name="image" src="https://img.icons8.com/material/48/000000/facebook-like--v1.png">
+                        </form>
+                                @endif
 
                     </div>
                 </div>
