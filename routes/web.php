@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'PostController@index')->name('home');
-Route::get('/weather-ajax', 'PostController@getWeather')->name('weather');
+Route::post('/weather-ajax', 'PostController@getWeather')->name('weather');
 Route::get('/article/{id}', 'PostController@article')->name('article_by_id');
 
 //likes

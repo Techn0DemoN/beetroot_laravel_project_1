@@ -5,17 +5,18 @@ document.addEventListener("DOMContentLoaded", function () {
         let user = {
             name: 'Vlad',
             last_name: 'Paramey',
+            '_token': document.querySelector('meta[name="csrf-token"]').content // добавляем CSRF токен
         };
 
 
-        fetch(url
-            //     {
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     method: 'POST',
-            //     body: JSON.stringify(user),
-            // }
+        fetch(url,
+                {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify(user),
+            }
         )
             .then((response) => {
                 return response.json();
