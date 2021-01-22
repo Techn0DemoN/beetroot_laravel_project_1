@@ -32,5 +32,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/add_post', 'PostController@addPost')->name('add_post');
     Route::get('/add_post', 'PostController@add')->name('create_post');
     Route::post('/change_like', 'LikeController@changeLikeAjax')->name('change_like_status_ajax');
+    Route::any('/parsing_obyava', 'ParsingObyavaUaController@index')->name('parisng_obyava');
 });
 

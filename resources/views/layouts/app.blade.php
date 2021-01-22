@@ -52,6 +52,11 @@
                             @endif
                         @else
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('parisng_obyava') }}">
+                                    Парсинг obyava.ua
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{route('create_post')}}">
                                     Crate post
                                 </a>
