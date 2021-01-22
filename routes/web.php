@@ -25,6 +25,9 @@ Route::get('/article/{id}', 'PostController@article')->name('article_by_id');
 Route::get('/category/{category}', 'PostController@postByCategory')->name('posts_by_category');
 Route::post('likes', 'LikeController@actionLike')->name('actionLike');
 
+Route::get('/search/result', 'SearchController@index')->name('liveSearchResult');
+Route::get('/autocomplete', 'SearchController@search')->name('searchAutocomplete');
+
 Route::middleware(['auth'])->group(function (){
     Route::post ('/add_post', 'PostController@addPost')->name('add_post');
     Route::get('/add_post', 'PostController@add')->name('create_post');

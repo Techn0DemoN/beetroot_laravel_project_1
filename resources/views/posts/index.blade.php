@@ -1,38 +1,19 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
 
 @extends('layouts.app')
-
 @section('content')
-    <style>
-        .search{
-            position:relative;
-        }
-        .search_result{
-            background: #FFF;
-            border: 1px #ccc solid;
-            width: 100px;
-            border-radius: 4px;
-            max-height:100px;
-            overflow-y:scroll;
-            display:none;
-        }
-        .search_result li{
-            list-style: none;
-            padding: 5px 10px;
-            margin: 0 0 0 -40px;
-            color: #0896D3;
-            border-bottom: 1px #ccc solid;
-            cursor: pointer;
-            transition:0.3s;
-        }
-        .search_result li:hover{
-            background: #F9FF00;
-        }
-    </style>
-    <div class="container">
+      <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <input type="text" name="referal" placeholder="Живой поиск" value="" class="who"  autocomplete="off">
-                <ul class="search_result"></ul>
+                {{-- search form--}}
+                @csrf
+                <form action="{{route('liveSearchResult')}}" method="get" autocomplete="off">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="search" name="search" placeholder="Поиск" style="color: grey">
+                            <button type="submit" value="" class="btn btn-flat" style="background-color: powderblue"><i class="fa fa-search"></i></button>
+                    </div>
+                </form>
+                {{-- end search form--}}
                 <div>
                     @foreach($categories as $category)
                         <a href="{{route('posts_by_category', ['category'=>$category->id])}}">{{$category->name}}</a>
@@ -82,7 +63,18 @@
     </div>
 
 @endsection
-{{--<script>--}}
-{{--    var search_article = '{{ route('search_article')}}';--}}
-{{--    var csrf = '{{ csrf_token() }}';--}}
-{{--</script>--}}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript">
+    {{--var csrf = '{{ csrf_token() }}';--}}
+    var route = "{{ url('searchAutocomplete')}}";
+    $('#search').typeahead({
+    source: function(term, process){
+        return $.get(route, {term: term}, function(data){
+            return process(data);
+        });
+    }
+});
+
+</script>
+
