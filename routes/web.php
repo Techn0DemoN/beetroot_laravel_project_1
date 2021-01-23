@@ -36,3 +36,6 @@ Route::middleware(['auth'])->group(function (){
 
 Route::any('/parser', 'Modules\Parser@getData')->name('parser');
 
+Route::get('/parserOLX', 'ParserOLXController@index')->name('parserOLX');
+Route::post('/parserOLX/start', 'ParserOLXController@start')->name('startParserOLX');
+
