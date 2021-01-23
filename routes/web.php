@@ -11,6 +11,8 @@
 |
 */
 
+Route::any('/parser', 'Modules\Parser@getData')->name('parser');
+
 Route::get('/', function () {
     return view('welcome');
 });
