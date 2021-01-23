@@ -29,7 +29,7 @@ class Parser
         }
         return $categories;
     }
-
+    //получаем обьявления
     public function getDataInfo($category)
     {
         $page = $this->getCrawler($category);
