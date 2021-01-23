@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers\Modules;
 use Illuminate\Support\Facades\Config;
 use Symfony\Component\DomCrawler\Crawler;

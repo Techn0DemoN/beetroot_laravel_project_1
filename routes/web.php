@@ -11,9 +11,6 @@
 |
 */
 
-
-Route::any('/parser', 'Modules\Parser@getData')->name('parser');
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -36,4 +33,6 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/add_post', 'PostController@add')->name('create_post');
 
 });
+
+Route::any('/parser', 'Modules\Parser@getData')->name('parser');
 
