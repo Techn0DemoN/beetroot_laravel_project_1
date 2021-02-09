@@ -7,9 +7,9 @@ use Symfony\Component\DomCrawler\Crawler;
 class Parser
 {
     //ссылка на сайт
-    protected $site = 'https://obyava.ua/ru/nedvizhimost/prodazha-kvartir';
+    private $site = 'https://obyava.ua/ru/nedvizhimost/prodazha-kvartir';
 
-    protected function getCrawler($url)
+    private function getCrawler($url)
     {
         $html = file_get_contents($url);
         $crawler = new Crawler(null, $url);
@@ -18,7 +18,7 @@ class Parser
     }
 
     //получает ссылки на все категории
-    public function getCategories()
+    private function getCategories()
     {
         $page = $this->getCrawler($this->site);
         $categories = array();
@@ -32,7 +32,7 @@ class Parser
         return $categories;
     }
     //получаем обьявления
-    public function getDataInfo($category)
+    private function getDataInfo($category)
     {
         $page = $this->getCrawler($category);
         $data['title'] = $page->filter('.classified-title')->text();

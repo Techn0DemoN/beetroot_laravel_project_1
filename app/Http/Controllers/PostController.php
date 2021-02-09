@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
 class PostController extends Controller
 {
     public function index()
+
     {
         $categories = Category::all();
         $posts = Post::with('user', 'category')->latest()->paginate(5);
@@ -57,11 +58,7 @@ class PostController extends Controller
 //        ]);
 
 // This is validation example 2
-//        if ($validator->fails()) {
-//            return redirect(route('create_post'))
-//                ->withErrors($validator)
-//                ->withInput();
-//        }
+//
 
 // This is validation example 3
 //        $this->validate($request, [
